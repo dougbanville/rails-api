@@ -34,5 +34,19 @@ RSpec.describe Article, type: :model do
 
 end
 
+  describe '.recent' do #testing a class method prefix with .
+    it 'should list recent article first' do
+      old_article = create:article
+      new_article = create:article
+      expect(described_class.recent).to eq(
+        [ new_article, old_article ]
+      )
+      old_article.update_column :created_at, TIme.now
+      expect(described_class.recent).to eq(
+        [ old_article, newer_article ]
+      )
+    end
+  end
+
 end
 
