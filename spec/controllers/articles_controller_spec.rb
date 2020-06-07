@@ -10,9 +10,18 @@ describe ArticlesController do
       create_list :article, 2
       get :index 
       json = JSON.parse(response.body)
-      pp json['data']
-      # json_data = json[:data]
-      # expect(json_data.length).to eq(2)
+      json_data = json['data']
+      expect(json_data.length).to eq(2)
+      expect(json_data[0]['attributes']).to eq({
+        "title" => "My awesome article 1",
+        "content" => "Content here 1",
+        "slug" => "my-awesome-article-1"
+      })
+      expect(json_data[1]['attributes']).to eq({
+        "title" => "My awesome article 2",
+        "content" => "Content here 2",
+        "slug" => "my-awesome-article-2"
+      })
     end
   end
 end
